@@ -24,22 +24,20 @@ else :
 						newline=newline+nline[i]+" "
 		else:
 			newline = line
-			line = line.replace("  "," ")
-			correct_cccs=re.split("_",line)
+			line = line.replace("  "," ").strip()
+			correct_cccs=re.split("[_]",line)
 			split_line = re.split(" ",line)
+			print correct_cccs[0]
 			try:
+				re.match("^\d",correct_cccs[1])
 				value=int(correct_cccs[1])
 				var=split_line[5].split("_")
-				newline=split_line[0]+"  " + split_line[1] + " " + split_line[2]  + " " + var[0]+ " " + var[1]
-				
+				newline=split_line[0]+"  " + split_line[-3] + " " + split_line[-2]  + " " + var[0]+ " " + var[1]+"\n"
 			except:
+			#else:
 				if (len(split_line)==6):
 					if ((split_line[1]=="1")or(split_line[1]=="3")):
-						newline=split_line[0] + "  " + "3 " + "4 " + "1 " + "2 " + split_line[5]
-
-
-
-
+						newline=split_line[0] + "  " + "3 " + "4 " + "1 " + "2 " + split_line[5] + "\n"
 		output.write(newline)
 	output.close()
 	fw.close()
