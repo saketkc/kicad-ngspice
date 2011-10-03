@@ -1,0 +1,5 @@
+convert.py converts kiCAD generated netlists to ngspice compatible format.
+
+Usage => $: python convert.py <kicad_netlist.cir>
+Output => netlist_output.cir , compatible with ngspiceWq     
+
