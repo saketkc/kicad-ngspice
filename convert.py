@@ -38,28 +38,38 @@ else :
 				if (len(split_line)==6):
 					if ((split_line[1]=="1")or(split_line[1]=="3")):
 						newline=split_line[0] + "  " + "3 " + "4 " + "1 " + "2 " + split_line[5] + "\n"
-		output.write(newline)
+		if (newline.strip()!= ".end"):
+			output.write(newline)
 	output.close()
 	fw.close()
+	#ask_for_models=raw_input("Enter models(y/n) ? ").strip()
+	#if (ask_for_models=="y"):
+
 	resp=raw_input("Enter simulation data(y/n)? ")
 	if (resp=="y"):
-		analysis_type= raw_input("Type of Analysis(AC[a]/Trans[T])")
+		analysis_type= raw_input("Type of Analysis(AC[a]/Trans[t]): ")
 		if (analysis_type=="a"):
-			ac_scale=raw_input("Type of Scale : lin/dec/oct").strip()
-			number_of_data_points=input("Number of Data Points")
-			start_frequency= raw_input("Enter frequency").strip()
-			end_frequency = raw_input("Enter end frequency").strip()
-			appendline_ac_or_trans = ".ac " + str(ac_scale) + " " + str(number_of_data_points)+" " + str(start_frequency) + " " + str(end_frequency) + "\n" +"\n"
+			ac_scale=raw_input("Type of Scale : lin/dec/oct: ").strip()
+			number_of_data_points=input("Number of Data Points: ")
+			start_frequency= raw_input("Enter frequency: ").strip()
+			end_frequency = raw_input("Enter end frequency: ").strip()
+			appendline_ac_or_trans = ".ac " + str(ac_scale) + " " + str(number_of_data_points)+" " + str(start_frequency) + " " + str(end_frequency) + "\n" 
 		elif(analysis_type=="t"):
 			print "Enter dat input for Transition analysis"
 			start_time = raw_input("Start Time: ").strip()
 			end_time = raw_input("End Time: ").strip()
-			appendline_ac_or_trans = ".trans" + " " + str(start_time) + " " + str(end_time)
+			appendline_ac_or_trans = ".trans" + " " + str(start_time) + " " + str(end_time) + "\n"
 		else:
-			exit
-		appendline_end = ".end"
-		appendline_control=".control\n" + "run\n" + ".endc"  
+			sys.exit(0)
+		appendline_end = ".end\n"
+		appendline_control=".control\n" + "run\n" + ".endc\n"
 		with open("netlist_output.cir","a") as myfile:
+			myfile.write("\n")
 			myfile.write(appendline_ac_or_trans)
+			myfile.write("\n\n")
 			myfile.write(appendline_end)
+			myfile.write("\n\n\n")
 			myfile.write(appendline_control)
+	else:
+		with open("netlist_output.cir","a") as myfile:
+			myfile.write("\n.end\n")
