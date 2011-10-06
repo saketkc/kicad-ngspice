@@ -41,3 +41,25 @@ else :
 		output.write(newline)
 	output.close()
 	fw.close()
+	resp=raw_input("Enter simulation data(y/n)? ")
+	if (resp=="y"):
+		analysis_type= raw_input("Type of Analysis(AC[a]/Trans[T])")
+		if (analysis_type=="a"):
+			ac_scale=raw_input("Type of Scale : lin/dec/oct").strip()
+			number_of_data_points=input("Number of Data Points")
+			start_frequency= raw_input("Enter frequency").strip()
+			end_frequency = raw_input("Enter end frequency").strip()
+			appendline_ac_or_trans = ".ac " + str(ac_scale) + " " + str(number_of_data_points)+" " + str(start_frequency) + " " + str(end_frequency) + "\n" +"\n"
+		elif(analysis_type=="t"):
+			print "Enter dat input for Transition analysis"
+			start_time = raw_input("Start Time: ").strip()
+			end_time = raw_input("End Time: ").strip()
+			appendline_ac_or_trans = ".trans" + " " + str(start_time) + " " + str(end_time)
+		else:
+			exit
+		appendline_end = ".end"
+		appendline_control=".control\n" + "run\n" + ".endc"  
+		with open("netlist_output.cir","a") as myfile:
+			myfile.write(appendline_ac_or_trans)
+			myfile.write(appendline_end)
+			myfile.write(appendline_control)
