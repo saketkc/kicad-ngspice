@@ -1,6 +1,6 @@
 import re
 import sys,math
-
+import linecache
 if (len(sys.argv)<= 1):
 	print "Incorrect number of parameters"
 else :
@@ -42,9 +42,54 @@ else :
 			output.write(newline)
 	output.close()
 	fw.close()
-	#ask_for_models=raw_input("Enter models(y/n) ? ").strip()
-	#if (ask_for_models=="y"):
+	ask_for_models=raw_input("Enter models(y/n) ? ").strip()
+	if (ask_for_models=="y"):
+		database_fp=open("database.txt","r")
+		i=1
+		type_model=[""]
+		for line in database_fp:
+			if ((line.strip()!="1>>") and (line.strip()!="")):
+				print str(i) + str(line) 
+				type_model.insert(i-1,str(line.strip()))
+				i+=1
+			else:
+				break
+		model_number = input("Enter model numeber :")
+		selected_model_name=type_model[model_number-1]
+		model_name = raw_input("Enter model name ").strip()
 
+		start_line=1
+		database_fp.close()
+		database_fp=open("database.txt","r")
+		for line in database_fp:
+			if(line.strip()==(str(model_number)+">>")):
+				break
+			else:
+				#print line
+				start_line+=1
+		database_fp.close()
+		model_content=""
+		start_line+=1
+		print start_line
+		is_read= True
+		while is_read:
+			line = linecache.getline("database.txt",start_line)
+			start_line+=1
+			if (line.strip()==(str(model_number+1)+">>")):
+				is_read= False
+			else:
+				model_content = model_content+line.strip()+"\n"
+		model_content=model_content.replace(selected_model_name,model_name)
+		 
+		print model_content
+		with open("netlist_output.cir","a") as myfile:
+			myfile.write(model_content)
+			myfile.write("\n\n")
+
+
+
+	else:
+		sys.exit(0)
 	resp=raw_input("Enter simulation data(y/n)? ")
 	if (resp=="y"):
 		analysis_type= raw_input("Type of Analysis(AC[a]/Trans[t]): ")
