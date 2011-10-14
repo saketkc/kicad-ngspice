@@ -88,8 +88,8 @@ else :
 
 
 
-	else:
-		sys.exit(0)
+	#else:
+		#sys.exit(0)
 	resp=raw_input("Enter simulation data(y/n)? ")
 	if (resp=="y"):
 		analysis_type= raw_input("Type of Analysis(AC[a]/Trans[t]): ")
