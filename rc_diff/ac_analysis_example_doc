@@ -1,0 +1,21 @@
+AC analysis using command line interface:
+
+-> open kicad schematic (rc_diff_ac_analysis.sch)
+
+-> generate SPICE netlist
+
+-> on Terminal type, ngspice rc_diff_ac_analysis.cir
+
+-> For AC analysis,
+
+ac lin 1000 0.1 250khz
+
+// Information about AC analysis
+// ac :Type of analysis
+// lin: varying frequency scale linearly. other options are dec and oct
+// 1000: data points
+// 0.1: start freq
+// 250khz: end freq
+
+->For plotting frequency response,  plot v(2)
+
