@@ -1,10 +1,13 @@
 import pygtk
+import re
+import sys,math
+import linecache
 pygtk.require('2.0')
 import gtk
 
 class TextViewExample:
 
-    def convert(filename):
+    def convert(self,button,filename):
         fw = open(filename, 'r')
         output = open ('netlist_output.cir','w')
         for line in fw:
@@ -41,6 +44,8 @@ class TextViewExample:
                 output.write(newline)
         output.close()
         fw.close()
+        print "netlist_output.cir generated successfully"
+
     def toggle_editable(self,checkbutton,textview):
         textview.set_editable(checkbutton.get_active())
     def toggle_cursor_visible(self,checkbutton,textview):
@@ -99,12 +104,12 @@ class TextViewExample:
         textview2.show()
         box2.pack_start(sw1)
         boxV2.pack_start(sw2)
-        infile=open("netlist_output.cir","r")
-        if infile:
-            string = infile.read()
-            infile.close()
-            textbuffer1.set_text(string)
-            textbuffer2.set_text(string)
+       #infile=open("netlist_output.cir","r")
+       # if infile:
+        #    string = infile.read()
+         #   infile.close()
+         #   textbuffer1.set_text(string)
+         #   textbuffer2.set_text(string)
         hbox = gtk.HButtonBox()
         box2.pack_start(hbox, False, False, 0)
         hbox.show()
@@ -118,8 +123,9 @@ class TextViewExample:
         box2.set_border_width(10)
         box1.pack_start(box2, False, True, 0)
         box2.show()
-        button = gtk.Button("close")
-        button.connect("clicked", self.close_application)
+        button = gtk.Button("convert")
+        filename="check.cir"
+        button.connect("clicked", self.convert,filename)
         box2.pack_start(button, True, True, 0)
         button.set_flags(gtk.CAN_DEFAULT)
         button.grab_default()
