@@ -1,0 +1,51 @@
+Full Wave Diode Rectifier with and without Cap Filter 
+
+****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+* Schematics Version 8.0 - July 1997
+* Fri Sep 09 23:04:18 2011
+
+
+.PARAM         VIN_AMPL=6V FREQ=50Hz C_FILT=10uF
+
+** Analysis setup **
+.tran 0.01MS 60MS
+
+
+* From [SCHEMATICS NETLIST] section of msim.ini:
+.lib nom.lib
+
+
+**** INCLUDING EXP15_2.net ****
+* Schematics Netlist *
+
+
+
+C_C1         OUT1 0  {C_FILT}  
+R_RL1         OUT1 0  1K  
+V_V1         IN1 IN2  
++SIN 0 {VIN_AMPL} {FREQ} 0 0 0
+R_RL2         OUT2 0  1K  
+V_V2         IN3 IN4  
++SIN 0 {VIN_AMPL} {FREQ} 0 0 0
+D_D3         0 IN1 D1N4002 
+D_D4         0 IN2 D1N4002 
+D_D2         IN2 OUT1 D1N4002 
+D_D1         IN1 OUT1 D1N4002 
+D_D8         IN3 OUT2 D1N4002 
+D_D5         IN4 OUT2 D1N4002 
+D_D6         0 IN4 D1N4002 
+D_D7         0 IN3 D1N4002 
+
+
+**** RESUMING EXP15_2.cir ****
+.probe
+
+.END
+

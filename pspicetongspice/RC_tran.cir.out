@@ -1,0 +1,16 @@
+dc transients in rc circuit
+
+r_r1         n_0002 n_0001  10k
+c_c1         n_0001 0  10u
+c_c2         n_0003 0  10u ic=50v
+r_r2         n_0004 n_0003  20k
+v_v1         n_0002 0 pulse 0 100 0 0 0 1.1s 3s
+v_v2         n_0004 0 pulse 0 100 0 0 0 1.1 2.5s
+
+.tran 0.1ms 2.5s
+
+# Control Statements 
+.control
+run
+.endc
+.end

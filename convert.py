@@ -100,7 +100,7 @@ else :
 			end_frequency = raw_input("Enter end frequency: ").strip()
 			appendline_ac_or_trans = ".ac " + str(ac_scale) + " " + str(number_of_data_points)+" " + str(start_frequency) + " " + str(end_frequency) + "\n" 
 		elif(analysis_type=="t"):
-			print "Enter dat input for Transition analysis"
+			print "Enter data input for Transition analysis"
 			start_time = raw_input("Start Time: ").strip()
 			end_time = raw_input("End Time: ").strip()
 			appendline_ac_or_trans = ".trans" + " " + str(start_time) + " " + str(end_time) + "\n"

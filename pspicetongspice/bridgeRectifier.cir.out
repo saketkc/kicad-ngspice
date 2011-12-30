@@ -1,0 +1,24 @@
+full wave diode rectifier with and without cap filter
+.include d1n4002.lib
+
+c_c1         out1 0  10uf
+r_rl1         out1 0  1k
+v_v1         in1 in2 sin 0 6v 50hz 0 0 0
+r_rl2         out2 0  1k
+v_v2         in3 in4 sin 0 6v 50hz 0 0 0
+d_d3         0 in1 d1n4002
+d_d4         0 in2 d1n4002
+d_d2         in2 out1 d1n4002
+d_d1         in1 out1 d1n4002
+d_d8         in3 out2 d1n4002
+d_d5         in4 out2 d1n4002
+d_d6         0 in4 d1n4002
+d_d7         0 in3 d1n4002
+
+.tran 0.01ms 60ms
+
+* Control Statements 
+.control
+run
+.endc
+.end

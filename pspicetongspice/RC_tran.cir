@@ -1,0 +1,36 @@
+DC Transients in RC Circuit
+
+
+* Schematics Version 8.0 - July 1997
+* Fri Sep 09 23:02:42 2011
+
+
+
+** Analysis setup **
+.tran 0.1ms 2.5s
+
+
+.lib nom.lib
+
+.INC "EXP17_1.net"
+
+**** INCLUDING EXP17_1.net ****
+* Schematics Netlist *
+
+
+
+R_R1         $N_0002 $N_0001  10k  
+C_C1         $N_0001 0  10u  
+C_C2         $N_0003 0  10u IC=50v 
+R_R2         $N_0004 $N_0003  20k  
+V_V1         $N_0002 0  
++PULSE 0 100 0 0 0 1.1s 3S
+V_V2         $N_0004 0  
++PULSE 0 100 0 0 0 1.1 2.5s
+
+
+.probe
+
+
+.END
+

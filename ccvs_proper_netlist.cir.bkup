@@ -1,0 +1,11 @@
+* EESchema Netlist Version 1.1 (Spice format) creation date: Monday 03 October 2011 03:51:43 PM IST
+
+
+H1 6 1 vc1 0.5k
+vc1  2 3 0
+R3  6 0 R
+R1  5 3 100
+R2  1 0 R
+v1  2 0 10
+
+.end

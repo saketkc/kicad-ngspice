@@ -1,0 +1,24 @@
+transistor example
+.include q2n2222.lib
+
+r_rbias  n_0001 vdd 20k
+r_rc1    out1 vdd 10k
+r_rc2    out2 vdd 10k
+r_rs2    n_0002 0 1k
+r_rs1    n_0004 n_0003 1k
+q_q3     n_0001 n_0001 vee q2n2222
+q_q4     n_0005 n_0001 vee q2n2222
+q_q1     out1 n_0003 n_0005 q2n2222
+q_q2     out2 n_0002 n_0005 q2n2222
+c_cload  out1 out2 5p
+v_v3     vee 0 dc -12
+v_v2     vdd 0 dc +12
+v_v1     n_0004 0 dc .125 ac 1 sin 0v 0.1v 5meg 0 0 0
+
+.tran 20ns 1000ns
+
+* Control Statements 
+.control
+run
+.endc
+.end

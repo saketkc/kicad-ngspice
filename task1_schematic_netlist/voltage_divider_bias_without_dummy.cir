@@ -1,0 +1,20 @@
+* EESchema Netlist Version 1.1 (Spice format) creation date: Wednesday 30 November 2011 05:08:41 PM IST
+
+
+.MODEL TR NPN(BF=140 CJC=20pf CJE=20pf IS=1E-16 VJE =0.7)
+
+R4  5 0 3.9k
+Q1  4 5 2 TR
+R3  2 0 1.5k
+v1  3 0 22
+R1  3 5 39k
+R2  3 4 10k
+
+.tran 1ms 100ms
+
+.control
+run
+.endc
+
+
+.end

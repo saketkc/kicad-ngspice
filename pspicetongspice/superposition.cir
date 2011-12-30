@@ -1,0 +1,33 @@
+SUperposition Theorem
+* Schematics Version 8.0 - July 1997
+* Fri Sep 09 23:00:11 2011
+
+** Analysis setup **
+.DC  V_V1 0 5
++ 0.1
+* Schematics Netlist *
+R_RL1         X1 0  5  
+R_RL2         X2 0  5  
+V_V3         $N_0001 0 0
+V_V2         $N_0002 0 10V
+R_R1         $N_0003 X  5  
+V_V1         $N_0003 0 10
+R_RL         X 0  5  
+I_I1         0 X DC 20A  
+I_I2         0 X1 DC 0A  
+R_R2         $N_0002 X1  5  
+I_I4         0 X2 DC 20A  
+R_R3         $N_0001 X2  5  
+*Coomands
+.lib nom.lib
+.PRINT I(R_RL) I(R_RL1) I(R_RL2) 
+
+.probe
+
+.END
+
+
+
+
+
+

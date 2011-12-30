@@ -1,0 +1,42 @@
+Transistor Example
+
+* Schematics Version 6.0p - November 1993
+* Fri Nov 19 09:38:28 1993
+
+
+** Analysis setup **
+.tran 20ns 1000ns
+.TEMP 35
+
+
+* From [SCHEMATICS NETLIST] section of msim.ini:
+.lib nom.lib
+
+.INC "example.net"
+
+**** INCLUDING example.net ****
+* Schematics Netlist *
+
+
+
+R_RBIAS  $N_0001 VDD 20k 
+R_RC1    OUT1 VDD 10k 
+R_RC2    OUT2 VDD 10k 
+R_RS2    $N_0002 0 1k 
+R_RS1    $N_0004 $N_0003 1k 
+Q_Q3     $N_0001 $N_0001 VEE Q2N2222
+Q_Q4     $N_0005 $N_0001 VEE Q2N2222
+Q_Q1     OUT1 $N_0003 $N_0005 Q2N2222
+Q_Q2     OUT2 $N_0002 $N_0005 Q2N2222
+C_CLOAD  OUT1 OUT2 5p 
+V_V3     VEE 0 DC -12  
+V_V2     VDD 0 DC +12  
+V_V1     $N_0004 0 DC .125 AC 1
++SIN 0v 0.1v 5Meg 0 0 0
+
+
+
+.probe
+
+
+.END

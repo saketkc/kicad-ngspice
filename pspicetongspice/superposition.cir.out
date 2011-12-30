@@ -1,0 +1,26 @@
+superposition theorem
+
+r_rl1         x1 dummy_1  5
+r_rl2         x2 dummy_2  5
+v_v3         n_0001 0 0
+v_v2         n_0002 0 10v
+r_r1         n_0003 x  5
+v_v1         n_0003 0 10
+r_rl         x dummy_0  5
+i_i1         0 x dc 20a
+i_i2         0 x1 dc 0a
+r_r2         n_0002 x1  5
+i_i4         0 x2 dc 20a
+r_r3         n_0001 x2  5
+vr_rl dummy_0 0 0
+vr_rl1 dummy_1 0 0
+vr_rl2 dummy_2 0 0
+
+.dc  v_v1 0 5  0.1
+
+* Control Statements 
+.control
+run
+print i(vr_rl) i(vr_rl1) i(vr_rl2)
+.endc
+.end

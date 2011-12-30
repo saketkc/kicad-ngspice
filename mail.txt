@@ -1,0 +1,10 @@
+2. Adding .Model file:
+-> This feature is already implemented by you in command line interface mode. Now you need to do it GUI based.
+-> Functionality for creating new model also needs to be implemented. This is already done by yogesh. check newmodel.py for same. you need to incorporate this in your python code.
+
+3. Analysis and control command:
+-> This feature is also implemented by you in command line interface mode.But there are some bugs in that. We have reported it on Github.
+   Please address those issues before implementing GUI for this.
+-> For transient analysis using transistor netlist I have attached as an example file.
+-> For AC analysis you can use RC differentiator circuit I have mailed you earlier.
+

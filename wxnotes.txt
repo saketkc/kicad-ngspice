@@ -1,0 +1,6 @@
+wx.Frame(wx.Window parent, int id=-1, string title='', wx.Point pos = wx.DefaultPosition,
+wx.Size size = wx.DefaultSize, style = wx.DEFAULT_FRAME_STYLE, string
+
+	
+
+

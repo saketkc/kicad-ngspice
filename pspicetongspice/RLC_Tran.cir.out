@@ -1,0 +1,14 @@
+rlc circuit in time domain
+
+c_c1         n_0001 0  100u
+l_l1         n_0002 n_0001  0.001
+r_r1         n_0003 n_0002  5
+v_v1         n_0003 0 sin 0 100 159.15 0 0 0
+
+.tran 0.1m 40ms 0 0.01m
+
+* Control Statements 
+.control
+run
+.endc
+.end

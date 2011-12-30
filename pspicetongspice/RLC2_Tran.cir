@@ -1,0 +1,32 @@
+RLC Circuit in Time domain
+
+
+* Schematics Version 8.0 - July 1997
+* Fri Sep 09 23:03:55 2011
+
+
+.PARAM         pi=3.14159 w=1000rad r=5
+
+** Analysis setup **
+.tran 0.1m 40ms 0 0.01m
+.OP 
+
+
+* From [SCHEMATICS NETLIST] section of msim.ini:
+.lib nom.lib
+
+* Schematics Netlist *
+
+
+
+C_C1         $N_0001 0  100u  
+L_L1         $N_0002 $N_0001  0.001  
+R_R1         $N_0003 $N_0002  {r}  
+V_V1         $N_0003 0  
++SIN 0 100 {w/(2*pi)} 0 0 0
+
+**** RESUMING EXP8_2.cir ****
+.probe
+
+
+.END
