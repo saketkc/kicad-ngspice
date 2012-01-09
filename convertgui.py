@@ -1,5 +1,5 @@
 import wx
-import os
+import os,re
 ID_ABOUT=101
 ID_OPEN=102
 ID_SAVE=103
@@ -14,36 +14,7 @@ class PageOne(wx.Panel):
     def __init__(self, parent):
         #wx.Panel.__init__(self, parent)
 	wx.Panel.__init__(self, parent)
-	#panel2 = wx.Panel(panel, -1)
-	#hbox = wx.BoxSizer(wx.HORIZONTAL)
 	
-	
-	#panel3 = wx.Panel(panel, -1)
-	#sizer3 = wx.StaticBoxSizer(wx.StaticBox(self, -1, 'Options'), orient=wx.VERTICAL)
-	#vbox3 = wx.BoxSizer(wx.VERTICAL)
-	#grid = wx.GridSizer(3, 2, 0, 5)
-	#grid.Add(wx.CheckBox(self, -1, 'Case Sensitive'))
-	#grid.Add(wx.CheckBox(self, -1, 'Wrap Search'))
-	#grid.Add(wx.CheckBox(self, -1, 'Whole Word'))
-	#grid.Add(wx.CheckBox(self, -1, 'Incremental'))
-	#vbox3.Add(grid)
-	#vbox3.Add(wx.CheckBox(self, -1, 'Regular expressions'))
-	#sizer3.Add(vbox3, 0, wx.TOP, 4)
-	#self.SetSizer(sizer3)
-	#vbox.Add(self, 0, wx.BOTTOM, 15)
-	#vbox_top.Add(vbox, 1, wx.LEFT, 5)
-	#self.SetSizer(vbox_top)
-	#hbox2 = wx.BoxSizer(wx.VERTICAL)
-	#sizer =  wx.StaticBoxSizer(wx.StaticBox(self, -1, 'DC SWEEP'), orient=wx.VERTICAL)
-	#sizer.Add(wx.SpinCtrl(self, -1, '1', (-10, -10), (-0, 1), min=1, max=120), 1)
-	#hbox2.Add(
-	#hbox2.Add(sizer, 1,wx.TOP,4)
-	#self.SetSizer(hbox2)
-       # t = wx.StaticText(self, -1, "This is a PageOne object", (20,20))
-	#self.Centre()
-	#self.Show(True)
-	#self.ShowModal()
-	#self.Destroy()
 
 class PageTwo(wx.Panel):
     def __init__(self, parent):
@@ -106,6 +77,10 @@ class PageTwo(wx.Panel):
 	    ac_scale = "log"
 	elif self.octal:
 	    ac_scale = "octal"
+	previous_data = txtctrl.GetValue()
+	#print previous_data
+	data_real = re.sub(r'.end.*',"",previous_data)
+	txtctrl.SetValue(data_real)
 	number_of_data_points = str(self.datapoints.GetValue())
 	start_frequency = str(self.start.GetValue())+ str(self.startscale.GetValue())
 	stop_frequency = str(self.stop.GetValue())+ str(self.stopscale.GetValue())
