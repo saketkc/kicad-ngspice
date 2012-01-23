@@ -94,7 +94,52 @@ class PageTwo(wx.Panel):
 class PageThree(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
-        t = wx.StaticText(self, -1, "Transient", (60,60))
+        
+        grid1 = wx.GridSizer(5, 2)	
+	grid1.Add(wx.StaticText(self,-1,'Start Time'),1)
+	hbox = wx.BoxSizer(wx.HORIZONTAL)
+	self.start = wx.SpinCtrl(self, -1, '',  (150, 75), (60, -1))
+	hbox.Add(self.start)
+	self.startscale = wx.ComboBox(self, -1, value = 'sec',  choices=['ms', 'ns', 'us', 'ps'], size=(60, -1), style=wx.CB_DROPDOWN)
+	hbox.Add(self.startscale)
+	grid1.Add(hbox)
+	grid1.Add(wx.StaticText(self,-1,'Stop Time'),1)
+	hbox = wx.BoxSizer(wx.HORIZONTAL)
+	self.stop = wx.SpinCtrl(self, -1, '',  (150, 75), (60, -1))
+	hbox.Add(self.stop)
+	self.stopscale = wx.ComboBox(self, -1, value = 'sec',  choices=['ms', 'ns', 'us', 'ps'], size=(60, -1), style=wx.CB_DROPDOWN)
+	hbox.Add(self.stopscale)
+	grid1.Add(hbox)
+	
+	hbox = wx.BoxSizer(wx.HORIZONTAL)
+	self.button = wx.Button(self,901,"Add Simulation Data")
+	hbox.Add(self.button)
+	self.button.Bind(wx.EVT_BUTTON, self.enter_simulation)
+	grid1.Add(wx.StaticText(self,-1,''),1)
+	grid1.Add(hbox)
+	self.SetSizer(grid1)
+	self.Centre()
+	self.Show(True)
+    
+    def enter_simulation(self,e):
+	txtctrl = self.GetParent().GetParent().control
+	
+	previous_data = txtctrl.GetValue()
+	#print previous_data
+	data_real = re.sub(r'.end.*',"",previous_data)
+	txtctrl.SetValue(data_real)	
+	start_time = str(self.start.GetValue())+ str(self.startscale.GetValue())
+	stop_time = str(self.stop.GetValue())+ str(self.stopscale.GetValue())
+	appendline_trans = ".trans "  + " "  + str(start_time) + " " + str(stop_time) + "\n" 
+	appendline_end = ".end\n"
+	appendline_control=".control\n" + "run\n" + ".endc\n"
+	#with open(filename,"a") as myfile:
+	txtctrl.AppendText("\n")
+	txtctrl.AppendText(appendline_trans)
+	txtctrl.AppendText("\n\n")
+	txtctrl.AppendText(appendline_end)
+	txtctrl.AppendText(appendline_control)
+
 
 class PageFour(wx.Panel):
     def __init__(self, parent):
