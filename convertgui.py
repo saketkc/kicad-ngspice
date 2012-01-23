@@ -20,7 +20,7 @@ class PageTwo(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
         sizer = wx.StaticBoxSizer(wx.StaticBox(self, -1, 'Scale'), orient=wx.HORIZONTAL)
-	self.lin = wx.RadioButton(self, -1, 'Lin', style=wx.RB_GROUP)
+	self.lin = wx.RadioButton(self, -1, 'Lin')
 	self.log = wx.RadioButton(self, -1, 'Log')
 	self.dec = wx.RadioButton(self, -1, 'Dec')
 	self.octal = wx.RadioButton(self, -1, 'Oct')
@@ -30,11 +30,7 @@ class PageTwo(wx.Panel):
 	sizer.Add(self.octal)
 	grid1 = wx.GridSizer(5, 2)
 	grid1.Add(sizer,1)
-	
-
-	#grid1.Add(sizer2,2)
 	grid1.Add(wx.StaticText(self,-1,''))
-	#grid1.Add(wx.StaticText(self,-1,''))
 	grid1.Add(wx.StaticText(self,-1,'Start Frequency'),1)
 	hbox = wx.BoxSizer(wx.HORIZONTAL)
 	self.start = wx.SpinCtrl(self, -1, '',  (150, 75), (60, -1))
@@ -69,13 +65,13 @@ class PageTwo(wx.Panel):
 	print self.GetParent().GetParent().control.GetValue()
     def enter_simulation(self,e):
 	txtctrl = self.GetParent().GetParent().control
-	if self.lin:
+	if self.lin.GetValue():
 	    ac_scale="lin"
-	elif self.dec:
+	elif self.dec.GetValue():
 	    ac_scale="dec"
-	elif self.log:
+	elif self.log.GetValue():
 	    ac_scale = "log"
-	elif self.octal:
+	elif self.octal.GetValue():
 	    ac_scale = "octal"
 	previous_data = txtctrl.GetValue()
 	#print previous_data
@@ -98,9 +94,24 @@ class PageTwo(wx.Panel):
 class PageThree(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
-        t = wx.StaticText(self, -1, "This is a PageThree object", (60,60))
+        t = wx.StaticText(self, -1, "Transient", (60,60))
+
+class PageFour(wx.Panel):
+    def __init__(self, parent):
+        wx.Panel.__init__(self, parent)
+        t = wx.StaticText(self, -1, "Fourier", (60,60))
 
 
+class PageFive(wx.Panel):
+    def __init__(self, parent):
+        wx.Panel.__init__(self, parent)
+        t = wx.StaticText(self, -1, "Pole Zero", (60,60))
+
+
+class PageSix(wx.Panel):
+    def __init__(self, parent):
+        wx.Panel.__init__(self, parent)
+        t = wx.StaticText(self, -1, "Transfer Function", (60,60))
 class MainFrame(wx.Frame):
     def __init__(self):#self,parent,wx.ID_ANY, title
         wx.Frame.__init__(self,None, wx.ID_ANY, title="kicad ngspice")
@@ -154,11 +165,17 @@ class MainFrame(wx.Frame):
         page1 = PageOne(nb)
         page2 = PageTwo(nb)
         page3 = PageThree(nb)
+        page4 = PageFour(nb)
+        page5 = PageFive(nb)
+        page6 = PageSix(nb)
 
         # add the pages to the notebook with the label to show on the tab
         nb.AddPage(page1, "DC")
         nb.AddPage(page2, "AC")
         nb.AddPage(page3, "Transient")
+        nb.AddPage(page4, "Fourier")
+        nb.AddPage(page5, "Pole Zero")
+        nb.AddPage(page6, "Transfer Function")
 
         # finally, put the notebook in a sizer for the panel to manage
         # the layout
